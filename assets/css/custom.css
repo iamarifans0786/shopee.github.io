@@ -1,0 +1,76 @@
+/*---------------------------------------------------------------------
+    File Name: custom.css
+---------------------------------------------------------------------*/
+
+/**----- Add your awesome css here -----**/
+
+.logo-img {
+    height: 100px;
+    width: auto;
+}
+
+.product-category-img {
+    height: 450px;
+    width: 100%;
+}
+
+.fashion-product-img {
+    height: 400px;
+    width: 100%;
+}
+
+.product-list-img {
+    height: 400px !important;
+}
+
+.product-img-container {
+    height: 695px !important;
+}
+
+.product-404 {
+    margin: 10px auto !important;
+}
+
+.product-detail-img {
+    height: 500px !important;
+    width: 437px !important;
+    margin: 0px auto;
+}
+
+.product-detail-sub-img {
+    height: 180px !important;
+}
+
+.similer_product-img {
+    height: 400px !important;
+    width: 1300px !important;
+}
+
+.about-testiminial-img {
+    display: inline !important;
+    width: 150px;
+    height: 150px;
+}
+
+.our-team-img {
+    height: 310px !important;
+}
+
+.profile-pic {
+    width: 200px !important;
+    height: 200px !important;
+}
+
+.blog-list-img {
+    width: 100%;
+    height: auto;
+}
+
+.home-blog-img {
+    width: 100%;
+    height: 350px;
+
+}
+.error-img{
+    width: 200px !important;
+}

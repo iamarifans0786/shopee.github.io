@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- inner page banner -->
+<div class="section inner_banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <h3>Checkout</h3>
+                    <ul class="breadcrum">
+                        <li><a href="{% url 'home_page' %}">Home</a></li>
+                        <li>&gt;</li>
+                        <li>Checkout</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end inner page banner -->
+<!-- section -->
+<div id="content-page" class="section main-content-box checkout_section">
+    <div class="container">
+        <form method="post" >
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-sm-6 col-lg-6 mb-3">
+                    <div class="checkout-address">
+                        <div class="title"> <span>Billing address</span> </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">First name *</label>
+                                <input type="text" class="form-control" id="firstName"
+                                    value="{{user_detail.first_name}}" readonly name="first_name" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName">Last name *</label>
+                                <input type="text" class="form-control" id="lastName" value="{{user_detail.last_name}}"
+                                    name="last_name" readonly />
+
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email">Email Address *</label>
+                            <input type="email" class="form-control" id="email" value="{{user_detail.email}}" readonly
+                                name="email" />
+                        </div>
+                        {{form}}
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-6 mb-3">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12">
+                            <div class="order-box">
+                                <div class="title"> <span>Your order</span> </div>
+                                <div class="d-flex">
+                                    <div class="product_head_o">Product</div>
+                                    <div class="ml-auto product_total_o">Total</div>
+                                </div>
+                                <div class="d-flex price_column">
+                                    <h4>Sub Total</h4>
+                                    <div class="ml-auto sub_totol_pr">₹{{sub_total}}</div>
+                                </div>
+                                <div class="d-flex price_column">
+                                    <h4>Discount</h4>
+                                    <div class="ml-auto"> ₹0</div>
+                                </div>
+                                <div class="d-flex price_column">
+                                    <h4>Shipping Cost</h4>
+                                    <div class="ml-auto">₹{{shipping}}</div>
+                                </div>
+                                <div class="d-flex gr-total price_column_bold">
+                                    <h5>Grand Total</h5>
+                                    <div class="ml-auto h5"> ₹{{grand_total}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 d-flex shopping-box">
+                            <button type="submit" class="ml-auto btn btn-info">
+                                Place Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- end section -->
+{% endblock content %}

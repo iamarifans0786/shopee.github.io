@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- inner page banner -->
+<div class="section inner_banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <h3>FAQ</h3>
+                    <ul class="breadcrum">
+                        <li><a href="{% url 'home_page' %}">Home</a></li>
+                        <li>&gt;</li>
+                        <li>Faq</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end inner page banner -->
+<!-- section -->
+<div class="section layout_padding border_bottom_light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="main_heading">
+                    <h2><span class="style_head">Frequently Asked <strong>Questions</strong></span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-md-12 offset-lg-1">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    {% for faq in faqs %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                                    aria-expanded="true" aria-controls="collapseOne">
+                                   {{faq.question}}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in show" role="tabpanel"
+                            aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <p> {{faq.answer}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end section -->
+
+    {% endblock content %}

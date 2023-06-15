@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- inner page banner -->
+<div class="section inner_banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <h3>Orders</h3>
+                    <ul class="breadcrum">
+                        <li><a href="{% url 'home_page' %}">Home</a></li>
+                        <li>&gt;</li>
+                        <li>My Orders</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end inner page banner -->
+<!-- section -->
+<div id="content-page" class="section main-content-box shopping-cart-box">
+    <div class="container-fluid limit-box">
+
+        {% if orders %}
+
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="w-50" scope="col">Order ID</th>
+                                <th class="d-none d-sm-table-cell" scope="col">Order Status</th>
+                                <th class="d-none d-sm-table-cell" scope="col">Pyment Status</th>
+                                <th class="d-none d-sm-table-cell" scope="col">Order Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                            <tr>
+                                <th scope="row">
+                                    <div class="s-cart-box">
+                                        <div class="product-item-info media">
+                                            <div class="media-body">
+                                                <div>
+                                                    <a href="{% url 'OrderDetailView' order_id=order.id %}">
+                                                        <h3>{{order.razor_pay_order_id}}</h3>
+                                                    </a>
+                                                </div>
+                                                <div class="mb-1"> <span class="d-inline d-sm-none small">Order Status
+                                                        <span class="text-theme">
+                                                            <h3>{{order.order_status}}</h3>
+                                                        </span></span>
+                                                </div>
+                                                <div class="mb-1"> <span class="d-inline d-sm-none small">Payment Status
+                                                        <span class="text-theme">
+                                                            <h3>{{order.payment_status}}</h3>
+                                                        </span></span>
+                                                </div>
+                                                <div class="mb-1"> <span class="d-inline d-sm-none small">Order Date
+                                                        <span class="text-theme">
+                                                            <h3>{{order.date}}</h3>
+                                                        </span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
+                                <td class="d-none d-sm-table-cell">
+                                    <div class="price-box"> <span>{{order.order_status}}</span> </div>
+                                </td>
+                                <td class="d-none d-sm-table-cell">
+                                    <div class="price-box"> <span>{{order.payment_status}}</span> </div>
+                                </td>
+                                <td class="d-none d-sm-table-cell">
+                                    <div class="price-box"> <span>{{order.date}}</span> </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row my-5">
+            <div class="col-12 d-flex shopping-box">
+                <a href="{% url 'product_page' %}" class="btn btn-default">
+                    Continue Shopping</a>
+            </div>
+        </div>
+        {% else %}
+        <div class="row ml-5">
+            <h1 class="text-info">You don't have any Order</h1>
+            <div class="col-12 d-flex shopping-box"> <a href="{% url 'product_page' %}" class="btn btn-default">Continue
+                    Shopping</a></div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+<!-- end section -->
+
+{% endblock content %}

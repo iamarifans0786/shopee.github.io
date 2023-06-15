@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- inner page banner -->
+<div class="section inner_banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <h3>Wishlist</h3>
+                    <ul class="breadcrum">
+                        <li><a href="{% url 'home_page' %}">Home</a></li>
+                        <li>&gt;</li>
+                        <li>My Wishlist</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end inner page banner -->
+<!-- section -->
+<div id="content-page" class="section main-content-box shopping-cart-box">
+    <div class="container-fluid limit-box">
+        {% if wishlist_products %}
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="w-50" scope="col">Product</th>
+                                <th class="d-none d-sm-table-cell" scope="col">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for wishlist_product in wishlist_products %}
+                            <tr>
+                                <th scope="row">
+                                    <div class="s-cart-box">
+                                        <div class="product-item-info media">
+                                            <div class="product-item-photo mr-3 d-none d-md-block">
+                                                <div class="item-gallery">
+                                                    <a
+                                                        href="{% url 'product_detail' product_slug=wishlist_product.product.slug  %}">
+                                                        <img src="{{wishlist_product.product.cover_image.url}}"
+                                                            alt="" /> </a>
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <a href="{% url 'product_detail' product_slug=wishlist_product.product.slug  %}"
+                                                    class="h6">{{wishlist_product.product.name|title}}</a>
+                                                <div class="small"> Category ?
+                                                    {{wishlist_product.product_category.name}} </div>
+                                                <div class="small"> Brand ? {{wishlist_product.brand.name}} </div>
+                                                <div class="mb-1"> <span class="d-inline d-sm-none small">Price: <span
+                                                            class="text-theme">₹{{wishlist_product.product.price}}</span></span>
+                                                </div>
+                                                <div class="btn-group btn-group-sm">
+                                                    <a href="{% url 'RemoveWishListItem' wishlist_product_id=wishlist_product.id %}"
+                                                        class="btn btn-light py-0">Remove</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
+                                <td class="d-none d-sm-table-cell">
+                                    <div class="price-box"> <span>₹ {{wishlist_product.product.price}}</span> </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row my-5">
+            <div class="col-12 d-flex shopping-box">
+                <a href="{% url 'product_page' %}" class="btn btn-default">
+                    Continue Shopping</a>
+            </div>
+        </div>
+        {% else %}
+        <div class="row ml-5">
+            <h1 class="text-info">You don't have any product in your Wishlist.</h1>
+            <div class="col-12 d-flex shopping-box"> <a href="{% url 'product_page' %}" class="btn btn-default">Continue
+                    Shopping</a></div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+<!-- end section -->
+{% endblock content %}

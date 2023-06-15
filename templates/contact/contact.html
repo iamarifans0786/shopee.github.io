@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- section -->
+<div class="section">
+    <div class="container-fuild">
+        <div class="row">
+            <div class="map_section">
+                <iframe class="w-100"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7277.33993537737!2d83.0294894384071!3d24.218335698033442!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398edaff6267a929%3A0x20892c7bef6dc475!2sRenukoot%20Colony%2C%20Hindalco%20Colony%2C%20Renukoot%2C%20Uttar%20Pradesh%20231217!5e0!3m2!1sen!2sin!4v1686583615522!5m2!1sen!2sin"
+                    width="1365" height="600" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end section -->
+<!-- section -->
+<div id="content-page" class="section main-content-box my-account">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="main_heading">
+                    <h2><span class="style_head">Contact <strong>us</strong></span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="contact_form">
+                    <div class="contact-box">
+                        <form class="form-horizontal" method="post">
+                            {% csrf_token %}
+                            <div class="messages"></div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input id="form_name" type="text" name="name" class="form-control"
+                                            placeholder="" required="required" data-error="Firstname is required." />
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Email Address</label>
+                                        <input id="form_email" type="email" name="email" class="form-control"
+                                            placeholder="" required="required" data-error="Valid email is required." />
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Phone Number</label>
+                                        <input id="form_phone" type="tel" name="phone" class="form-control"
+                                            placeholder="" required="required" data-error="Phone is required" />
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Message</label>
+                                        <textarea id="form_message" name="message" class="form-control" placeholder=""
+                                            rows="4" required="required"
+                                            data-error="Please,leave us a message."></textarea>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-sub hover-btn"><span>Submit</span></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="title"> <span>Contact Information</span> </div>
+                <div class="contact-info">
+                    {% for address in address %}
+                    <div class="address-box">
+                        <h3>Address</h3>
+                        <ul>
+                            <li>
+                                <span>
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                </span>
+                                {{ address.address }}
+                            </li>
+                            <li>
+                                <span>
+                                    <i class="fa fa-volume-control-phone" aria-hidden="true"></i>
+                                </span> +91 {{ address.phone }}
+                            </li>
+                            <li>
+                                <span><i class="fa fa-envelope" aria-hidden="true"></i>
+                                </span>
+                                <a>
+                                    <span>
+                                        {{ address.email }}
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end section -->
+
+</html>
+{% endblock content %}

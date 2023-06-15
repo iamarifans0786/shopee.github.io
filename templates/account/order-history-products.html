@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- inner page banner -->
+<div class="section inner_banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <h3>Order History</h3>
+                    <ul class="breadcrum">
+                        <li><a href="{% url 'home_page' %}">Home</a></li>
+                        <li>&gt;</li>
+                        <li>My Product</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end inner page banner -->
+<!-- section -->
+<div id="content-page" class="section main-content-box shopping-cart-box">
+    <div class="container-fluid limit-box">
+        {% if order_details %}
+        <!-- product details  -->
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="w-50" scope="col">Product</th>
+                                <th class="text-center" scope="col">Quantity</th>
+                                <th class="d-none d-sm-table-cell" scope="col">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order_detail in order_details %}
+                            <tr>
+                                <th scope="row">
+                                    <div class="s-cart-box">
+                                        <div class="product-item-info media">
+                                            <div class="product-item-photo mr-3 d-none d-md-block">
+                                                <div class="item-gallery">
+                                                    <a href="#"> <img src="{{order_detail.product.cover_image.url}}"
+                                                            alt="" /> </a>
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <a href="{% url 'product_detail' product_slug=order_detail.product.slug  %}"
+                                                    class="h6">{{order_detail.product.name|title}}</a>
+                                                <div class="small">Size: {{order_detail.variation.name}} </div>
+                                                <div class="mb-1"> <span class="d-inline d-sm-none small">Price: <span
+                                                            class="text-theme">₹{{order_detail.product.price}}</span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
+                                <td class="text-center">
+                                    <div class="form-group input-group-qty d-inline-flex">
+                                        <div>
+                                            {{order_detail.quantity}}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="d-none d-sm-table-cell">
+                                    <div class="price-box"> <span>₹ {{order_detail.product.price}}</span> </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- end product details  -->
+        {% else %}
+        <div class="row ml-5">
+            <h1 class="text-info">You don't have any product in your Order History.</h1>
+            <div class="col-12 d-flex shopping-box"> <a href="{% url 'product_page' %}" class="btn btn-default">Continue
+                    Shopping</a></div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+<!-- end section -->
+{% endblock content %}

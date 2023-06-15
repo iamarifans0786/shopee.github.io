@@ -1,0 +1,27 @@
+/*---------------------------------------------------------------------
+    File Name: custom.css
+---------------------------------------------------------------------*/
+
+/**----- Add your awesome css here -----**/
+.product-category-img{
+    height: 450px !important;
+}
+.fashion-product-img{
+    height: 400px!important ;
+}
+.product-list-img{
+    height: 400px!important ;
+}
+.product-404{
+   margin: 10px auto !important;
+}
+.product-detail-img{
+    height: 500px !important;
+}
+.product-detail-sub-img{
+    height: 200px!important;
+}
+.similer_product-img{
+    height: 400px !important;
+    width: 1300px !important;
+}

@@ -1,0 +1,245 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<!-- inner page banner -->
+<div class="section inner_banner">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="full">
+               <h3>About us</h3>
+               <ul class="breadcrum">
+                  <li><a href="{% url 'home_page' %}">Home</a></li>
+                  <li>&gt;</li>
+                  <li>About us</li>
+               </ul>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- end inner page banner -->
+<!-- process section -->
+<div class="section layout_padding_2 light_silver border_bottom_light">
+   <div class="container">
+      <div class="row">
+         <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="full">
+               <div class="process_blog">
+                  <div class="step_no">
+                     <p>1</p>
+                  </div>
+                  <div class="step_infor">
+                     <p class="step_head">Select Any Item</p>
+                     <p class="step_cont">Browse &amp; Select</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="full">
+               <div class="process_blog">
+                  <div class="step_no">
+                     <p>2</p>
+                  </div>
+                  <div class="step_infor">
+                     <p class="step_head">Fast Payment</p>
+                     <p class="step_cont">Easy Payment Options</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="full">
+               <div class="process_blog">
+                  <div class="step_no">
+                     <p>3</p>
+                  </div>
+                  <div class="step_infor">
+                     <p class="step_head">Delivery</p>
+                     <p class="step_cont">24 Hours Delivery</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="full">
+               <div class="process_blog">
+                  <div class="step_no">
+                     <p>4</p>
+                  </div>
+                  <div class="step_infor">
+                     <p class="step_head">Got Your Item</p>
+                     <p class="step_cont">Thank you..!</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- end process section -->
+<!-- section -->
+<div class="section layout_padding border_bottom_light">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="main_heading">
+               <h2><span class="style_head">About <strong>us</strong></span></h2>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-lg-6">
+            <img class="img-responsive" src=" {% static 'images/about_img.png' %} " alt="#" />
+         </div>
+         <div class="col-lg-6">
+            <div class="full">
+               <div class="small_main_heading left_head">
+                  <h2><span class="style_head">Our <strong>company</strong></span></h2>
+               </div>
+            </div>
+            <div class="full">
+               <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                  totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta
+                  sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
+                  consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui
+                  dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora
+                  incidunt ut labore et dolore magnam aliquam quaerat voluptatem.<br /><br />I must explain to you how
+                  all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a
+                  complete account of the system, and expound the actual teachings of the great explorer of the truth,
+                  the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it
+                  is pleasure, but because those painful.<br /><br />Nor again is there anyone who loves or pursues or
+                  desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in
+                  which toil and pain can procure him some great pleasure. </p>
+            </div>
+
+         </div>
+      </div>
+   </div>
+</div>
+<!-- end section -->
+<!-- section -->
+<div class="section layout_padding border_bottom_light">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="main_heading">
+               <h2><span class="style_head">Our <strong>Team</strong></span></h2>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+
+         {% for team in our_teams %}
+         <div class="col-sm-6 col-lg-3">
+            <div class="hover-team">
+               <div class="our-team">
+                  <img class="our-team-img" src="{{team.image.url}}" alt="" />
+                  <ul class="social">
+                     <li>
+                        <a href="#" class="fa fa-facebook"></a>
+                     </li>
+                     <li>
+                        <a href="#" class="fa fa-twitter"></a>
+                     </li>
+                     <li>
+                        <a href="#" class="fa fa-google-plus"></a>
+                     </li>
+                  </ul>
+                  <div class="icon"> <i class="fa fa-plus" aria-hidden="true"></i> </div>
+               </div>
+               <div class="team-description">
+                  <div class="team-content">
+                     <h3 class="title">{{team.name}}</h3>
+                     <span class="post">{{team.position}}</span>
+                  </div>
+               </div>
+            </div>
+         </div>
+         {% endfor %}
+      </div>
+   </div>
+</div>
+<!-- end section -->
+<!-- section -->
+<div class="section layout_padding dark_bg">
+   <div class="container white_bg box_shadow">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="full testimonial_slider">
+               <div class="main_heading">
+                  <h2><span class="style_head">Client <strong>Say&#39;s</strong></span></h2>
+               </div>
+               <div id="testimonial_s" class="carousel slide" data-ride="carousel">
+                  <ol class="carousel-indicators">
+                     <li data-target="#testimonial_s" data-slide-to="0" class="active"></li>
+                     <li data-target="#testimonial_s" data-slide-to="1"></li>
+                     <li data-target="#testimonial_s" data-slide-to="2"></li>
+                  </ol>
+                  {% for testimonial in testimonials %}
+                  <div class="carousel-item text-center 
+                       {% if testimonial.id == 4 %}
+                           active
+                       {% endif %}
+                           ">
+                     <div class="img-box">
+                        <img class=" rounded-circle about-testiminial-img" src=" {{testimonial.image.url}} "
+                           alt="#" />
+                     </div>
+                     <p>
+                        {{testimonial.comment}}
+                     </p>
+                     <p class="name_client"><strong>-{{testimonial.name}}</strong></p>
+                  </div>
+                  {% endfor %}
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- end section -->
+<!-- section -->
+<div class="section layout_padding">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="banner_blog">
+               <ul>
+                  <li class="theme_bg">
+                     <div class="cont_deal">
+                        <p class="head">Hot Deal</p>
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit volup tatem accus antium</p>
+                        <p><a class="readmore_bt" href="#">Read More &gt;</a></p>
+                     </div>
+                  </li>
+                  <li>
+                     <span class="featued_img">
+                        <img src=" {% static 'images/banner3.png' %} " alt="#" />
+                     </span>
+                  </li>
+                  <li class="dark_bg">
+                     <div class="cont_deal">
+                        <p class="head">New Arrivals</p>
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit volup tatem accus antium</p>
+                        <p><a class="readmore_bt" href="#">Read More &gt;</a></p>
+                     </div>
+                  </li>
+                  <li>
+                     <span class="featued_img">
+                        <img src=" {% static 'images/banner4.png' %} " alt="#" />
+                     </span>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- end section -->
+</html>
+{% endblock content %}

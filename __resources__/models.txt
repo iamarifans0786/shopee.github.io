@@ -1,0 +1,99 @@
+# Brand
+class Brand:
+    name = Char(max_length=255)
+    status = Bool(default=True)
+
+
+# Products
+Class ProductCategory:
+    name = Char(max_length=255)
+    slug = Slug()
+    image = Image(upload_to='product_category')
+    status = Bool(default=True)
+
+class Variation:
+    name = Char(max_length=255)
+    status = Bool(default=True)
+
+class Tag:
+    name = Char(max_length=255)
+    status = Bool(default=True)
+
+class Product:
+    product_category = FK(ProductCategory, ondelete=CASCADE)
+    name = Char(max_length=255)
+    slug = Slug()
+    cover_image = Image(upload_to='product')
+    price = DecimalField(max_digit=7, decimal_point=2)
+    description = TextField()
+    variation = ManyToManyField(Variation)
+    tag = ManyToManyField(Tag)
+    status = Bool(default=True)
+
+class ProductImages:
+    product = FK(Product)
+    image = ImageField(upload_to='product')
+
+
+# User Profile
+class UserProfile:
+    user = OneToOneField('django.contrib.auth.models.User', ondelete=CASCADE)
+    mobile = Char(max_length=12)
+    address = TextField()
+
+# Cart
+class Cart:
+    user = FK('django.contrib.auth.models.User', ondelete=CASCADE)
+    product = FK(Product, ondelete=CASCADE)
+    quantity = Int(default=1)
+
+
+# Order
+class Order:
+    user = FK('django.contrib.auth.models.User', ondelete=CASCADE)
+    date_time = DateTime()
+    address = TextField()
+    payment = Boolean(default=False)
+    status = Char(choices=('inprogress', 'pending', 'completed', 'rejected'), default='pending')
+
+
+class OrderDetails:
+    order = FK(Order, ondelete=CASCADE)
+    product = FK(Product, ondelete=SET_NULL)
+    quantity = IntField()
+    price = DecimalField(max_digit=7, decimal_point=2)
+
+
+# Payment 
+class Payment:
+    order = FK(Order, ondelete=SET_NULL)
+    transactio_id = Char()
+    status = Char()
+
+# CMS
+class WebsiteSetting:
+    title = Char(max_length=255)
+    logo = Image(upload_to='logo')
+    email = EmailFIeld()
+    phone = Char(max_length=12)
+    address = TextField()
+
+class Slider:
+    heading = Char(max_length=20)
+    sub_heading = Char(max_length=20)
+    image = ImageField(upload_to='slider')
+    status = BooleanField(default=True)
+
+class Blog:
+    title = Char(max_length=255)
+    slug = Slug('title')
+    description = TextField()
+    author = Char(max_length=255)
+    date_time = DateTime()
+    image = ImageField(upload_to='blog')
+    status = BooleanField(default=True)
+
+class FAQ:
+    question = Char(max_length=255)
+    answer = TextField()
+    status = BooleanField(default=True)

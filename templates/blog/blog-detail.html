@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- inner page banner -->
+<div class="section inner_banner">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="full">
+               <h3>Blog Detail</h3>
+               <ul class="breadcrum">
+                  <li><a href="{% url 'home_page' %}">Home</a></li>
+                  <li>&gt;</li>
+                  <li>Blog Detail</li>
+               </ul>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- end inner page banner -->
+<!-- section -->
+<div class="section layout_padding border_bottom_light blog_section">
+   <div class="container">
+      <div class="row">
+         <!-- blog section -->
+         <div class="col-md-8 col-lg-8">
+            <div class="row">
+
+               <!-- blog section -->
+               <div class="col-md-12 blog_layout margin_bottom_30_all">
+                  <div class="blog_inner blog_list">
+                     <div class="blog_featured_img">
+                        <img class="img-responsive" src="{{blog.image.url}}" alt="#" />
+                        <div class="post_information">
+                           <div class="post_info_inner">
+                              <div class="post_info_inner">
+                                 <ul>
+                                    <li><i class="fa fa-clock-o"></i><a href="#"> {{blog.date_time}}</a></li>
+                                    <li><i class="fa fa-user"></i><a href="#"> Admin</a></li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="blog_featured_cont">
+                        <h3>{{blog.title}}</h3>
+                        <h5 class="post_author_name">Posted by {{blog.auther|title}}</h5>
+                        <p>{{blog.sub_title}}</p>
+                        <hr>
+                        <p>{{blog.description}}</p>
+                     </div>
+                  </div>
+               </div>
+               <!-- end blog section -->
+            </div>
+         </div>
+         <!-- blog section -->
+         <!-- sidebar -->
+         <div class="col-md-4 col-lg-4">
+            <div class="full sidebar_blog_main">
+               <div class="inline-search clearfix">
+                  <form action="#" method="get" class="widget_search">
+                     <input placeholder="Start Searching..." id="s" name="s" class="serch-input" type="search" />
+                     <button type="submit"> <i class="fa fa-search"></i> </button>
+                  </form>
+               </div>
+               <div class="fied-tab-box">
+                  <ul class="nav nav-tabs nav-bottom-border nav-justified">
+                     <li class="nav-item"> <a class="nav-item active" href="#tab_1" data-toggle="tab">Recent</a></li>
+                     <li class="nav-item"> <a class="nav-item" href="#tab_2" data-toggle="tab">Popular
+                        </a>
+                     </li>
+                  </ul>
+                  <div class="tab-content">
+                     <div id="tab_1" class="tab-pane active fade show">
+                        {% for recent_blog in recent_blogs %}
+                        <div class="row tab-post">
+                           <div class="col-md-3 col-3">
+                              <div class="post-ibox">
+                                 <a href="#"> <img src="{{recent_blog.image.url}}" alt="#" /> </a>
+                              </div>
+                           </div>
+                           <div class="col-md-9 col-9">
+                              <a href="{% url 'blog_detail' blog_slug=recent_blog.slug %}" class="tab-post-link">{{recent_blog.title|title}}</a>
+                               <small>{{recent_blog.date_time}}</small>
+                              <p>{{recent_blog.sub_title}}</p>
+                           </div>
+                        </div>
+                        {% endfor %}
+                     </div>
+                     <div id="tab_2" class="tab-pane fade">
+                        {% for popular_blog in popular_blogs %}
+                        <div class="row tab-post">
+                           <div class="col-md-3 col-3">
+                              <div class="post-ibox">
+                                 <a href="#"> <img src="{{popular_blog.image.url}}" alt="#" /> </a>
+                              </div>
+                           </div>
+                           <div class="col-md-9 col-9">
+                              <a href="{% url 'blog_detail' blog_slug=popular_blog.slug %}" class="tab-post-link">{{popular_blog.title|title}}</a> 
+                              <small>{{popular_blog.date_time}}</small>
+                              <p>{{popular_blog.sub_title}}</p>
+                           </div>
+                        </div>
+                        {% endfor %}
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- end sidebar -->
+      </div>
+   </div>
+</div>
+<!-- end section -->
+{% endblock content %}

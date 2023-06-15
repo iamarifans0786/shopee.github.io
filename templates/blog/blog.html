@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- inner page banner -->
+<div class="section inner_banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <h3>Blog List</h3>
+                    <ul class="breadcrum">
+                        <li><a href="{% url 'home_page' %}">Home</a></li>
+                        <li>&gt;</li>
+                        <li>Blog List</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end inner page banner -->
+<!-- section -->
+<div class="section layout_padding border_bottom_light blog_section">
+    <div class="container">
+        <div class="row">
+            {% if blogs %}
+            <!-- blog section -->
+            {% for blog in blogs %}
+            <div class="col-md-12 blog_layout margin_bottom_30_all">
+                <div class="blog_inner blog_list">
+                    <div class="blog_featured_img">
+                        <img class="img-responsive blog-list-img" src="{{blog.image.url}}" alt="#" />
+                        <div class="post_information">
+                            <div class="post_info_inner">
+                                <ul>
+                                    <li><i class="fa fa-clock-o"></i><a href="#"> {{blog.date_time}}</a></li>
+                                    <li><i class="fa fa-user"></i><a href="#"> Admin</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog_featured_cont">
+                        <h3>{{blog.title}}</h3>
+                        <h5 class="post_author_name">Posted by {{blog.auther|title}}</h5>
+                        <p>{{blog.sub_title}}</p>
+                        <div class="bottom_section">
+                            <a class="main_bt" href="{% url 'blog_detail' blog_slug=blog.slug %}">Read More &gt;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <!-- end blog section -->
+            {% else %}
+            <h1 class="alert bg-info product-404" style="margin: 10px auto;">
+                Blog Not Found
+            </h1>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<!-- end section -->
+
+{% endblock content %}
