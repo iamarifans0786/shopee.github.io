@@ -1,9 +1,9 @@
 steps to follow-
 Clone repository
 
-Create Virtualenv Command - virtualenv YOUR_VIRTUAL_ENV_NAME
+Create Virtualenv Command - virtualenv venv_name
 
-Activate virtual environment -in Power Shell- YOUR_VIRTUAL_ENV_NAME\Scripts\activate
+Activate virtual environment -in Power Shell- venv_name\Scripts\activate
 
 install all packages and dependencies at once from requirements.txt Command (In virtual environment): pip install -r requirements.txt NOTE: This Command will install all the supporting packages listed in requirements.txt files
 
