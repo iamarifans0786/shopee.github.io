@@ -1,8 +1,9 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from product.models import ProductCategory, Product, ProductImage
-from cart.models import Cart
+from cart.models import Cart, WishList
 from user_profile.models import UserProfile
+from order.models import Order, OrderDetails
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
@@ -27,7 +28,7 @@ class UserAuthSerializer(serializers.ModelSerializer):
             "email",
             "user_profile",
         ]
-        depth=1
+        depth = 1
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
@@ -120,3 +121,40 @@ class CartSerializer(serializers.ModelSerializer):
             "sub_total",
         ]
         depth = 1
+
+
+class WishlistSerializer(serializers.ModelSerializer):
+    """wishlist model serializer"""
+
+    class Meta:
+        model = WishList
+        fields = [
+            "id",
+            "product",
+        ]
+        depth = 1
+
+
+class OrderDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderDetails
+        fields = ["order", "product", "quantity", "price", "variation"]
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    order_detail = OrderDetailSerializer
+
+    class Meta:
+        model = Order
+        fields = [
+            "user",
+            "date",
+            "user_name",
+            "address",
+            "mobile",
+            "order_status",
+            "payment_status",
+            "razor_pay_order_id",
+            "order_detail",
+        ]
+        depth = 2

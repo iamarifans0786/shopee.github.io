@@ -5,7 +5,8 @@ from rest_framework.permissions import IsAuthenticated
 from django.db.models import F, Sum
 from django.contrib.auth.models import User
 from product.models import ProductCategory, Product
-from cart.models import Cart
+from cart.models import Cart, WishList
+from order.models import Order,OrderDetails
 from . import serializers
 
 
@@ -103,3 +104,91 @@ class CartView(views.APIView):
             return response.Response(
                 {"details": "Not found."}, status=status.HTTP_404_NOT_FOUND
             )
+
+
+class WishlistView(views.APIView):
+    """Cart API View"""
+
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    serializer_class = serializers.WishlistSerializer
+
+    def get(self, request, wishlistId=None):
+        """Get all wishlist items for current user"""
+
+        wishlist_products = WishList.objects.filter(user=request.user)
+        serializer = self.serializer_class(wishlist_products, many=True)
+        return response.Response(serializer.data)
+
+    def post(self, request, wishlistId=None):
+        """Add to wishlist"""
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            product = serializer.validated_data.get("product")
+            wishlist, is_created = WishList.objects.get_or_create(
+                user=request.user, product=product
+            )
+            wishlist.save()
+            return response.Response({"status": "Success"}, status=status.HTTP_200_OK)
+        return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, wishlistId=None):
+        try:
+            WishList.objects.get(id=wishlistId).delete()
+            return response.Response({"status": "success"})
+        except WishList.DoesNotExist:
+            return response.Response(
+                {"details": "Not found."}, status=status.HTTP_404_NOT_FOUND
+            )
+
+
+class OrderView(views.APIView):
+    """Cart API View"""
+
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    serializer_class = serializers.OrderSerializer
+
+    def get(self, request, orderId=None):
+        """Get all order items for current user"""
+        orders = Order.objects.filter(user=request.user)
+        serializer = self.serializer_class(orders, many=True)
+        return response.Response(serializer.data)
+
+    def post(self, request, orderId=None):
+        """Order Placed"""
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            user_name = serializer.validated_data.get("user_name")
+            address = serializer.validated_data.get("address")
+            mobile = serializer.validated_data.get("mobile")
+            order_status = serializer.validated_data.get("order_status")
+            payment_status = serializer.validated_data.get("payment_status")
+            razor_pay_order_id = serializer.validated_data.get("razor_pay_order_id")
+            
+            price = serializer.validated_data.get('order_detail["price"]')
+            product = serializer.validated_data.get('order_detail["product"]')
+            quantity = serializer.validated_data.get('order_detail["quantity"]')
+            variation = serializer.validated_data.get('order_detail["variation"]')
+
+            order, is_created = Order.objects.get_or_create(
+                user=request.user,
+                user_name=user_name,
+                address=address,
+                mobile=mobile,
+                order_status=order_status,
+                payment_status=payment_status,
+                razor_pay_order_id=razor_pay_order_id,
+            )
+            order.save()
+            order_detail, is_created = OrderDetails.objects.get_or_create(
+                order=order,
+                product=product,
+                quantity=quantity,
+                price=price,
+                variation=variation,
+            )
+            order_detail.save()
+            
+            return response.Response({"status": "Success"}, status=status.HTTP_200_OK)
+        return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
